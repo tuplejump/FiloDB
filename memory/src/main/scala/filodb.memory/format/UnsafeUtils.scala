@@ -7,7 +7,16 @@ import org.agrona.DirectBuffer
 import spire.implicits.cforRange
 // scalastyle:off number.of.methods
 object UnsafeUtils {
-  val unsafe = scala.concurrent.util.Unsafe.instance
+  // scalastyle:off
+  // Copy and translation from: https://github.com/scala/scala/blob/2.13.x/src/library/scala/runtime/Statics.java#L1760
+  final val unsafe: sun.misc.Unsafe = classOf[sun.misc.Unsafe].getDeclaredFields
+    .find(_.getType == classOf[sun.misc.Unsafe])
+    .map { field => {
+      field.setAccessible(true)
+      field.get(null).asInstanceOf[sun.misc.Unsafe]
+    }
+    } getOrElse (throw new IllegalStateException("Can't find instance of sun.misc.Unsafe"))
+  // scalastyle:on
 
   // scalastyle:off
   val ZeroPointer: Any = null
