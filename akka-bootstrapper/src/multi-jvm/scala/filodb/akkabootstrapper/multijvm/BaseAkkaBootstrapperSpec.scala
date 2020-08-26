@@ -14,6 +14,8 @@ import org.scalatest.concurrent.ScalaFutures
 import filodb.akkabootstrapper.{AkkaBootstrapper, ClusterMembershipHttpResponse}
 import org.scalatest.wordspec.AnyWordSpecLike
 
+import scala.language.postfixOps
+
 trait AkkaBootstrapperMultiNodeConfig extends MultiNodeConfig {
 
   val node1 = role("node1")
