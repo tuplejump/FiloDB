@@ -128,18 +128,19 @@ class ShardDownsamplerSpec extends AnyFunSpec with Matchers with BeforeAndAfterA
       }
     }
 
+    def toDoubles(s: Seq[Long]): Seq[Double] = s.map(_.toDouble)
     // timestamps
     val expectedTimestamps = (100000L to 195000L by 5000) ++ Seq(199000L)
     downsampledData1.map(_._1) shouldEqual expectedTimestamps
     // mins
-    val expectedMins = Seq(500000d) ++ (505000d to 980000d by 25000)
-    downsampledData1.map(_._2) shouldEqual expectedMins
+    val expectedMins = Seq(500000L) ++ (505000L to 980000L by 25000L)
+    downsampledData1.map(_._2) shouldEqual toDoubles(expectedMins)
     // maxes
-    val expectedMaxes = (100000d to 195000d by 5000).map(_ * 5) ++ Seq(995000d)
-    downsampledData1.map(_._3) shouldEqual expectedMaxes
+    val expectedMaxes = (100000L to 195000L by 5000L).map(_ * 5) ++ Seq(995000L)
+    downsampledData1.map(_._3.toDouble) shouldEqual toDoubles(expectedMaxes)
     // sums = (min to max).sum
-    val expectedSums = expectedMins.zip(expectedMaxes).map { case (min, max) => (min to max by 5000d).sum }
-    downsampledData1.map(_._4) shouldEqual expectedSums
+    val expectedSums = expectedMins.zip(expectedMaxes).map { case (min, max) => (min to max by 5000L).sum }
+    downsampledData1.map(_._4) shouldEqual toDoubles(expectedSums)
     // counts
     val expectedCounts = Seq(1d) ++ Seq.fill(19)(5d) ++ Seq(4d)
     downsampledData1.map(_._5) shouldEqual expectedCounts
@@ -177,14 +178,16 @@ class ShardDownsamplerSpec extends AnyFunSpec with Matchers with BeforeAndAfterA
     val expectedTimestamps2 = (100000L to 195000L by 10000) ++ Seq(199000L)
     downsampledData2.map(_._1) shouldEqual expectedTimestamps2
     // mins
-    val expectedMins2 = Seq(500000d) ++ (505000d to 980000d by 50000)
-    downsampledData2.map(_._2) shouldEqual expectedMins2
+    // NOTE: Would be better to use BigDecimals, but .sum does not work correctly on
+    // BigDecimal Range due to Scala bug: https://github.com/scala/scala/pull/7232
+    val expectedMins2 = Seq(500000L) ++ (505000L to 980000L by 50000L)
+    downsampledData2.map(_._2) shouldEqual toDoubles(expectedMins2)
     // maxes
-    val expectedMaxes2 = (100000d to 195000d by 10000).map(_ * 5) ++ Seq(995000d)
-    downsampledData2.map(_._3) shouldEqual expectedMaxes2
+    val expectedMaxes2 = (100000L to 195000L by 10000L).map(_ * 5) ++ Seq(995000L)
+    downsampledData2.map(_._3) shouldEqual toDoubles(expectedMaxes2)
     // sums = (min to max).sum
-    val expectedSums2 = expectedMins2.zip(expectedMaxes2).map { case (min, max) => (min to max by 5000d).sum }
-    downsampledData2.map(_._4) shouldEqual expectedSums2
+    val expectedSums2 = expectedMins2.zip(expectedMaxes2).map { case (min, max) => (min to max by 5000L).sum }
+    downsampledData2.map(_._4) shouldEqual toDoubles(expectedSums2)
     // counts
     val expectedCounts2 = Seq(1d) ++ Seq.fill(9)(10d) ++ Seq(9d)
     downsampledData2.map(_._5) shouldEqual expectedCounts2
