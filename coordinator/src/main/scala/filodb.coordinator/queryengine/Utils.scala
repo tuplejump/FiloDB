@@ -115,7 +115,7 @@ object Utils extends StrictLogging {
                   case err: ErrorResponse => throw ChildErrorResponse(coordRef, err)
                   case a: A @unchecked    => logger.trace(s"Received $a from $coordRef"); a
                 }
-                future.onFailure {
+                future.failed.foreach {
                   case e: Exception => logger.warn(s"Error asking $coordRef message $msg", e)
                 }
                 Task.fromFuture(future)
