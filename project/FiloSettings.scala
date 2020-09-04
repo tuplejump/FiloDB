@@ -112,7 +112,7 @@ object FiloSettings {
     // Uncomment below to debug Typesafe Config file loading
     // javaOptions ++= List("-Xmx2G", "-Dconfig.trace=loads"),
     // Make Akka tests more resilient esp for CI/CD/Travis/etc.
-    javaOptions ++= List("-Xmx2G", "-XX:+CMSClassUnloadingEnabled", "-Dakka.test.timefactor=3"),
+    javaOptions ++= List("-Xmx4G", "-XX:+CMSClassUnloadingEnabled", "-Dakka.test.timefactor=3"),
     // Needed to avoid cryptic EOFException crashes in forked tests
     // in Travis with `sudo: false`.
     // See https://github.com/sbt/sbt/issues/653
@@ -136,7 +136,7 @@ object FiloSettings {
       internalDependencyClasspath in IntegrationTest, exportedProducts in Test)).value)
 
   lazy val multiJvmSettings = SbtMultiJvm.multiJvmSettings ++ Seq(
-    javaOptions in MultiJvm := Seq("-Xmx2G", "-Dakka.test.timefactor=3"),
+    javaOptions in MultiJvm := Seq("-Xmx4G", "-Dakka.test.timefactor=3"),
     compile in MultiJvm := ((compile in MultiJvm) triggeredBy (compile in Test)).value)
 
   lazy val testMultiJvmToo = Seq(
