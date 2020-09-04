@@ -22,6 +22,8 @@ before_cache:
   - find $HOME/.sbt -name "*.lock" | xargs rm
   - find $HOME/.ivy2 -name "ivydata-*.properties" | xargs rm
 
+sbt_args: -jvm-opts travis/jvmopts
+
 services:
   - cassandra
 sudo: required
