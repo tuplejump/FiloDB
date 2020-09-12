@@ -245,7 +245,7 @@ private[filodb] trait KamonInit {
 /** Mixin for easy usage of the FiloDBCluster Extension.
   * Used by all `ClusterRole` nodes starting an ActorSystem and FiloDB Cluster nodes.
   */
-private[filodb] trait FilodbClusterNode extends NodeConfiguration with StrictLogging with KamonInit {
+private[filodb] trait FilodbClusterNode extends KamonInit with NodeConfiguration with StrictLogging {
   def role: ClusterRole
 
   /** Override to pass in additional module config. */
