@@ -242,6 +242,7 @@ final class FilodbCluster(val system: ExtendedActorSystem, overrideConfig: Confi
   * Used by all `ClusterRole` nodes starting an ActorSystem and FiloDB Cluster nodes.
   */
 private[filodb] trait FilodbClusterNode extends NodeConfiguration with StrictLogging {
+  Kamon.init()
 
   def role: ClusterRole
 
@@ -261,8 +262,6 @@ private[filodb] trait FilodbClusterNode extends NodeConfiguration with StrictLog
 
     ActorSystem(role.systemName, allConfig)
   }
-
-  Kamon.init()
 
   lazy val cluster = FilodbCluster(system)
 
