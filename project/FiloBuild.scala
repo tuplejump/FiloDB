@@ -101,7 +101,7 @@ object Submodules {
     .settings(
       commonSettings,
       name := "spark-jobs",
-      fork in Test := true,
+      fork in Test := false,
       baseDirectory in Test := file("."),   // since we have a config using FiloDB project root as relative path
       assemblySettings,
       scalacOptions += "-language:postfixOps",
