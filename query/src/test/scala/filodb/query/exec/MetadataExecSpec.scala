@@ -91,7 +91,7 @@ class MetadataExecSpec extends AnyFunSpec with Matchers with ScalaFutures with B
       timeseriesDataset.ref, 0, filters, Seq("job"), now-5000, now)
 
     val resp = execPlan.execute(memStore, querySession).runAsync.futureValue
-    val result = resp match {
+    val result = (resp: @unchecked) match {
       case QueryResult(id, _, response) => {
         val rv = response(0)
         rv.rows.size shouldEqual 1
@@ -111,7 +111,7 @@ class MetadataExecSpec extends AnyFunSpec with Matchers with ScalaFutures with B
       timeseriesDataset.ref, 0, filters, false, now-5000, now)
 
     val resp = execPlan.execute(memStore, querySession).runAsync.futureValue
-    resp match {
+    (resp: @unchecked) match {
       case QueryResult(_, _, results) => results.size shouldEqual 1
         results(0).rows.size shouldEqual 0
     }
@@ -125,7 +125,7 @@ class MetadataExecSpec extends AnyFunSpec with Matchers with ScalaFutures with B
       timeseriesDataset.ref, 0, filters, false, now-5000, now)
 
     val resp = execPlan.execute(memStore, querySession).runAsync.futureValue
-    val result = resp match {
+    val result = (resp: @unchecked) match {
       case QueryResult(id, _, response) =>
         response.size shouldEqual 1
         response(0).rows.map { row =>
@@ -146,7 +146,7 @@ class MetadataExecSpec extends AnyFunSpec with Matchers with ScalaFutures with B
       timeseriesDataset.ref, 0, filters, false, now-5000, now)
 
     val resp = execPlan.execute(memStore, querySession).runAsync.futureValue
-    val result = resp match {
+    val result = (resp: @unchecked) match {
       case QueryResult(id, _, response) => {
         response.size shouldEqual 1
         response(0).rows.map { row =>

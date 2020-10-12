@@ -2,9 +2,9 @@ language: scala
 dist: trusty
 env:
   global:
-   _JAVA_OPTIONS="-Dakka.test.timefactor=3 -XX:MaxMetaspaceSize=256m"
+   _JAVA_OPTIONS="-Dakka.test.timefactor=3 -XX:MaxMetaspaceSize=512m"
 scala:
-  - 2.11.12
+  - 2.12.12
 jdk:
   - openjdk11
 
@@ -18,6 +18,8 @@ before_cache:
   # Tricks to avoid unnecessary cache updates
   - find $HOME/.sbt -name "*.lock" | xargs rm
   - find $HOME/.ivy2 -name "ivydata-*.properties" | xargs rm
+
+sbt_args: -jvm-opts travis/jvmopts
 
 services:
   - cassandra

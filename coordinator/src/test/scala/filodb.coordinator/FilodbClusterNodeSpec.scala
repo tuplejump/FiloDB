@@ -34,7 +34,7 @@ trait SocketChecker {
   }
 }
 
-trait FilodbClusterNodeSpec extends AbstractSpec with FilodbClusterNode with ScalaFutures {
+trait FilodbClusterNodeSpec extends AbstractSpec with ScalaFutures with FilodbClusterNode {
   val port = 22552 + util.Random.nextInt(200)
 
   // Ensure that CoordinatedShutdown does not shutdown the whole test JVM, otherwise Travis CI/CD fails

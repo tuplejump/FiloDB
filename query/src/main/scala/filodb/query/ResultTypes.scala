@@ -10,7 +10,7 @@ trait QueryCommand extends NodeCommand with java.io.Serializable {
   def dataset: DatasetRef
 }
 
-trait QueryResponse extends NodeResponse with java.io.Serializable {
+sealed trait QueryResponse extends NodeResponse with java.io.Serializable {
   def id: String
 }
 

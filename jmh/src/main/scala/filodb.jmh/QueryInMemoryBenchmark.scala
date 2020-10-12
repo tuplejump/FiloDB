@@ -157,7 +157,7 @@ class QueryInMemoryBenchmark extends StrictLogging {
       val qCmd = queryCommands(n % queryCommands.length)
       val time = System.currentTimeMillis
       val f = asyncAsk(coordinator, qCmd.copy(qContext = qCmd.qContext.copy(queryId = n.toString, submitTime = time)))
-      f.onSuccess {
+      f.foreach {
         case q: QueryResult2 => queriesSucceeded += 1
         case e: QError       => queriesFailed += 1
       }
@@ -182,7 +182,7 @@ class QueryInMemoryBenchmark extends StrictLogging {
       val qCmd = queryCommands2(n % queryCommands2.length)
       val time = System.currentTimeMillis
       val f = asyncAsk(coordinator, qCmd.copy(qContext = qCmd.qContext.copy(queryId = n.toString, submitTime = time)))
-      f.onSuccess {
+      f.foreach {
         case q: QueryResult2 => queriesSucceeded += 1
         case e: QError       => queriesFailed += 1
       }

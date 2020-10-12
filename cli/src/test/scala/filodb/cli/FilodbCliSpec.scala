@@ -3,7 +3,9 @@ package filodb.cli
 import org.rogach.scallop.exceptions.ScallopException
 
 import filodb.coordinator.{ActorName, ClusterRole, RunnableSpec}
+import org.scalatest.Ignore
 
+@Ignore
 class FilodbCliSpec extends RunnableSpec {
   "A Filodb Cli" must {
     "initialize" in {

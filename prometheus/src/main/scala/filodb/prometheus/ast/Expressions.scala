@@ -44,7 +44,7 @@ trait Expressions extends Aggregates with Functions {
       if (hasScalarResult(lhs) && hasScalarResult(rhs)) {
         val rangeParams = RangeParams(timeParams.start, timeParams.step, timeParams.end)
 
-        (lhs, rhs) match {
+        ((lhs, rhs): @unchecked) match {
           // 3 + 4
           case (lh: ScalarExpression, rh: ScalarExpression) =>
             ScalarBinaryOperation(operator.getPlanOperator, Left(lh.toScalar), Left(rh.toScalar), rangeParams)

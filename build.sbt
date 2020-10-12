@@ -6,7 +6,7 @@ publishTo := Some(Resolver.file("Unused repo", file("target/unusedrepo")))
 // Global setting across all subprojects
 ThisBuild / organization := "org.filodb"
 ThisBuild / organizationName := "FiloDB"
-ThisBuild / scalaVersion := "2.11.12"
+ThisBuild / scalaVersion := "2.12.12"
 ThisBuild / publishMavenStyle := true
 ThisBuild / Test / publishArtifact := false
 ThisBuild / IntegrationTest / publishArtifact := false

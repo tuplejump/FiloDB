@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # set -x
-SCALA_VERSION="2.11"
+SCALA_VERSION="2.12"
 FILO_VERSION=$(cat version.sbt | sed -e 's/.*"\(.*\)"/\1/g')
 CLI_FILE=`pwd`"/cli/target/scala-$SCALA_VERSION/filo-cli-$FILO_VERSION"
 

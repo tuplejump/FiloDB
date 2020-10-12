@@ -163,7 +163,7 @@ class QueryAndIngestBenchmark extends StrictLogging {
   def parallelQueries(): Unit = {
     val futures = (0 until numQueries).map { n =>
       val f = asyncAsk(coordinator, queryCommands(n % queryCommands.length))
-      f.onSuccess {
+      f.foreach {
         case q: QueryResult2 =>
         case e: QError       => throw new RuntimeException(s"Query error $e")
       }
