@@ -234,6 +234,11 @@ class DownsampledTimeSeriesShard(rawDatasetRef: DatasetRef,
           // is expensive, but we do it to handle data sizing for metrics that have
           // continuous churn. See capDataScannedPerShardCheck method.
           val recs = partKeyIndex.partKeyRecordsFromFilters(filters, chunkMethod.startTime, chunkMethod.endTime)
+          if (recs.size > 100000) {
+            // if we have a 3 bit spread and one shard has more than 100K tss, it means
+            // that the cardinality of the query is ~800K close to a million, hence we want to log such queries
+            logger.warn(s"Number of tss: ${recs.size} for query ${querySession.qContext.origQueryParams}")
+          }
           val _schema = recs.headOption.map { pkRec =>
             RecordSchema.schemaID(pkRec.partKey, UnsafeUtils.arayOffset)
           }
