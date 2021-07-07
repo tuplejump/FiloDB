@@ -11,6 +11,7 @@ object Dependencies {
   val excludeMinlog = ExclusionRule(organization = "com.esotericsoftware", name = "minlog")
   val excludeOldLz4 = ExclusionRule(organization = "net.jpountz.lz4", name = "lz4")
   val excludeNetty  = ExclusionRule(organization = "io.netty", name = "netty-handler")
+  val excludeXBean = ExclusionRule(organization = "org.apache.xbean", name = "xbean-asm6-shaded")
 
 
   /* Versions in various modules versus one area of build */
@@ -43,6 +44,7 @@ object Dependencies {
     logbackDep % Test,
     scalaTest  % Test,
     "com.softwaremill.quicklens" %% "quicklens" % "1.4.12" % Test,
+    "org.apache.xbean" % "xbean-asm6-shaded" % "4.10" % Test,
     scalaCheck % Test,
     scalaTestPlus % Test
   )
@@ -80,7 +82,7 @@ object Dependencies {
   lazy val sparkJobsDeps = commonDeps ++ Seq(
     "org.apache.spark"       %%      "spark-core" % sparkVersion % Provided,
     "org.apache.spark"       %%      "spark-sql"  % sparkVersion % Provided,
-    "org.apache.spark"       %%      "spark-core" % sparkVersion % Test excludeAll(excludeNetty),
+    "org.apache.spark"       %%      "spark-core" % sparkVersion % Test excludeAll(excludeNetty, excludeXBean),
     "org.apache.spark"       %%      "spark-sql"  % sparkVersion % Test excludeAll(excludeNetty)
   )
 
