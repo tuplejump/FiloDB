@@ -35,8 +35,8 @@ object Dependencies {
   val akkaHttp          = "com.typesafe.akka"          %% "akka-http"            % akkaHttpVersion withJavadoc()
   val akkaHttpTestkit   = "com.typesafe.akka"          %% "akka-http-testkit"    % akkaHttpVersion withJavadoc()
   val akkaHttpCirce     = "de.heikoseeberger"          %% "akka-http-circe"      % "1.21.0"
-  val circeGeneric      = "io.circe"                   %% "circe-generic"        % "0.8.0"
-  val circeParser       = "io.circe"                   %% "circe-parser"         % "0.8.0"
+  val circeGeneric      = "io.circe"                   %% "circe-generic"        % "0.9.3"
+  val circeParser       = "io.circe"                   %% "circe-parser"         % "0.9.3"
 
   lazy val commonDeps = Seq(
     "io.kamon" %% "kamon-bundle" % kamonBundleVersion,
