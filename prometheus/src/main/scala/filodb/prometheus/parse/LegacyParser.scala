@@ -356,6 +356,7 @@ trait ExpressionParser extends AggregatesParser with SelectorParser with Numeric
 
     "(" ~ expression ~ ")" ^^ {
       case "(" ~ ep ~ ")" => PrecedenceExpression(ep)
+      case _ => ???
     }
   }
 

@@ -94,7 +94,7 @@ class MetadataExecSpec extends AnyFunSpec with Matchers with ScalaFutures with B
       timeseriesDataset.ref, 0, filters, Seq("job", "unicode_tag"), now-5000, now)
 
     val resp = execPlan.execute(memStore, querySession).runAsync.futureValue
-    val result = resp match {
+    val result = (resp: @unchecked) match {
       case QueryResult(id, _, response, _, _) => {
         val rv = response(0)
         rv.rows.size shouldEqual 1
@@ -114,7 +114,7 @@ class MetadataExecSpec extends AnyFunSpec with Matchers with ScalaFutures with B
       timeseriesDataset.ref, 0, filters, false, now-5000, now)
 
     val resp = execPlan.execute(memStore, querySession).runAsync.futureValue
-    resp match {
+    (resp: @unchecked) match {
       case QueryResult(_, _, results, _, _) => results.size shouldEqual 1
         results(0).rows.size shouldEqual 0
     }
@@ -128,7 +128,7 @@ class MetadataExecSpec extends AnyFunSpec with Matchers with ScalaFutures with B
       timeseriesDataset.ref, 0, filters, false, now-5000, now)
 
     val resp = execPlan.execute(memStore, querySession).runAsync.futureValue
-    val result = resp match {
+    val result = (resp: @unchecked) match {
       case QueryResult(id, _, response, _, _) =>
         response.size shouldEqual 1
         response(0).rows.map { row =>
@@ -149,7 +149,7 @@ class MetadataExecSpec extends AnyFunSpec with Matchers with ScalaFutures with B
       timeseriesDataset.ref, 0, filters, false, now-5000, now)
 
     val resp = execPlan.execute(memStore, querySession).runAsync.futureValue
-    val result = resp match {
+    val result = (resp: @unchecked) match {
       case QueryResult(id, _, response, _, _) => {
         response.size shouldEqual 1
         response(0).rows.map { row =>
@@ -168,7 +168,7 @@ class MetadataExecSpec extends AnyFunSpec with Matchers with ScalaFutures with B
       timeseriesDataset.ref, 0, filters, Seq("job", "unicode_tag"), now-5000, now)
 
     val resp = execPlan.execute(memStore, querySession).runAsync.futureValue
-    val result = resp match {
+    val result = (resp: @unchecked) match {
       case QueryResult(id, _, response, _, _) => {
         val rv = response(0)
         rv.rows.size shouldEqual 1
