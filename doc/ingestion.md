@@ -99,7 +99,7 @@ You can also look at [SourceSinkSuite.scala](../kafka/src/it/scala/filodb/kafka/
 ### Testing the Consumer
 
 * `sbt standalone/assembly`
-* `java -cp standalone/target/scala-2.11/standalone-assembly-0.7.0.jar filodb.kafka.TestConsumer my-kafka-sourceconfig.conf`
+* `java -cp standalone/target/scala-2.12/standalone-assembly-0.7.0.jar filodb.kafka.TestConsumer my-kafka-sourceconfig.conf`
 
 See the TestConsumer for more info.
 

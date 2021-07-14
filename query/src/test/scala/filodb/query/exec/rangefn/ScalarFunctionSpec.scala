@@ -141,7 +141,7 @@ class ScalarFunctionSpec extends AnyFunSpec with Matchers with ScalaFutures {
     implicit val timeout: FiniteDuration = FiniteDuration(5, TimeUnit.SECONDS)
     import monix.execution.Scheduler.Implicits.global
     val resp = execPlan.execute(memStore, querySession).runAsync.futureValue
-    val result = resp match {
+    val result = (resp: @unchecked) match {
       case QueryResult(id, _, response, _, _) => {
         val rv = response(0)
         rv.isInstanceOf[TimeScalar] shouldEqual(true)
@@ -156,7 +156,7 @@ class ScalarFunctionSpec extends AnyFunSpec with Matchers with ScalaFutures {
     implicit val timeout: FiniteDuration = FiniteDuration(5, TimeUnit.SECONDS)
     import monix.execution.Scheduler.Implicits.global
     val resp = execPlan.execute(memStore, querySession).runAsync.futureValue
-    val result = resp match {
+    val result = (resp: @unchecked) match {
       case QueryResult(id, _, response, _, _) => {
         val rv = response(0)
         rv.isInstanceOf[HourScalar] shouldEqual(true)
@@ -172,7 +172,7 @@ class ScalarFunctionSpec extends AnyFunSpec with Matchers with ScalaFutures {
     implicit val timeout: FiniteDuration = FiniteDuration(5, TimeUnit.SECONDS)
     import monix.execution.Scheduler.Implicits.global
     val resp = execPlan.execute(memStore, querySession).runAsync.futureValue
-    val result = resp match {
+    val result = (resp: @unchecked) match {
       case QueryResult(id, _, response, _, _) => {
         val rv = response(0)
         rv.isInstanceOf[DayOfWeekScalar] shouldEqual(true)

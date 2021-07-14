@@ -61,7 +61,7 @@ case class BinaryExpression(lhs: Expression,
     if (hasScalarResult(lhsWithPrecedence) && hasScalarResult(rhsWithPrecedence)) {
       val rangeParams = RangeParams(timeParams.start, timeParams.step, timeParams.end)
 
-      (lhsWithPrecedence, rhsWithPrecedence) match {
+      ((lhsWithPrecedence, rhsWithPrecedence): @unchecked) match {
         // 3 + 4
         case (lh: ScalarExpression, rh: ScalarExpression) =>
           ScalarBinaryOperation(operator.getPlanOperator, Left(lh.toScalar), Left(rh.toScalar), rangeParams)
